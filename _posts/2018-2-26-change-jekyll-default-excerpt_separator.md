@@ -16,7 +16,6 @@ While using "\n\n", posts will be most likely break at very early part. Due to h
 
 Fortunately we can configured it in file `_config.yml` like 
 
-
 	excerpt_separator: "<!-- readmore -->"
 
 So that in posts, we can specify the break point manually by type in `<!-- readmore -->` manually
