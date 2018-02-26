@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+KnockData
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+A place to include everything about data.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[knockdata@gmail.com](mailto:knockdata@gmail.com)
