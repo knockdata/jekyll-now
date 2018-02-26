@@ -11,6 +11,8 @@ description: Everything About Data
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars2.githubusercontent.com/u/20279371?s=400&u=228d49885ab7e838f574b46fa286a7823a3aff27&v=4
 
+excerpt_separator: "<!-- readmore -->"
+
 #
 # Flags below are optional
 #

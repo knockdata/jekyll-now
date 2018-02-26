@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Setup Blog with jekyll-now on github
+tags: jekyll 
 ---
 
 There are many ways setup blogs. With jekyll-now, it only takes few minutes, just with few steps.
@@ -12,6 +13,9 @@ There are many ways setup blogs. With jekyll-now, it only takes few minutes, jus
 1. modify `_config.yml` with the right configuration
 1. start blog by adding markdown files under folder _posts
 1. push to github, and your blog will be there
+
+
+<!-- readmore -->
 
 More detail could be found [a blog by barryclark](https://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/)
 
