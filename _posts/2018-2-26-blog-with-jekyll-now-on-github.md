@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Setup Blog with jekyll-now on github
+comments: true
 tags: jekyll 
 ---
 

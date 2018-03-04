@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Change Jekyll Default excerpt_separator
+comments: true
 tags: jekyll 
 ---
 
