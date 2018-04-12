@@ -1,5 +1,3 @@
-# [HDF5](https://www.hdfgroup.org/) File Handling
-
 HDF5 is a file format which to store numerical data. 
 It is widely used in Machine Learning space.
 
@@ -34,6 +32,8 @@ Import package
 Open a file
 
     train_dataset = h5py.File('datasets/train_catvnoncat.h5', "r")
+
+<!-- readmore -->
 
 Get the direct child keys
 
