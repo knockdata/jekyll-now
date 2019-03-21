@@ -187,7 +187,7 @@ The following example adding rows with lead and lag salary.
           "depName", "empNo", "name", "salary", "lead", "lag")
     df.show(false)
     
-Here is the output from the previous example
+Here is the output from the previous example 
 
 ![output-lag-lead](../images/spark-window-function-output-lag-lead.png)
 
@@ -307,11 +307,6 @@ The output from the previous example
 `mean`(`avg`) and `median` are commonly used in statistics. In certain cases `median` are more robust comparing to mean, since it will filter out outlier values.
 
 ![mean-median](../images/spark-window-function-mean-median.png)
-|             | mean   | median |
-|:------------|:-------|:-------|
-| definition  | average value | middle value |
-| advantage   | cheap to calculate | more robust for anomaly values |
-| disadvantage| anormal value can have large effect | expensive to calcuate
 
 We can either using Window function directly or first calculate the median value, then join back with the original data frame.
 
