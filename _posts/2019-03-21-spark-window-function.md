@@ -34,33 +34,34 @@ The sample dataset has 4 columns,
 
 Here is the sample dataset
 
-|  depName|empNo|            name|salary|          hobby|
-|:--------|:----|:---------------|:-----|:--------------|
-|    sales|    1| Alice Johansson|  5000|    [game, ski]|
-|personnel|    2|Olivia Johansson|  3900|    [game, ski]|
-|    sales|    3|  Ella Andersson|  4800|   [skate, ski]|
-|    sales|    4|   Ebba Karlsson|  4800|    [game, ski]|
-|personnel|    5| Lilly Andersson|  3500|   [climb, ski]|
-|  develop|    7|Astrid Johansson|  4200|    [game, ski]|
-|  develop|    8|   Saga Karlsson|  6000|   [kajak, ski]|
-|  develop|    9|   Freja Nilsson|  4500|  [game, kajak]|
-|  develop|   10|   Wilma Nilsson|  5200|    [game, ski]|
-|  develop|   11|    Maja Nilsson|  5200|[game, farming]|
+|  depName|empNo|  name|salary|          hobby|
+|:--------|:----|:-----|:-----|:--------------|
+|    sales|    1| Alice|  5000|    [game, ski]|
+|personnel|    2|Olivia|  3900|    [game, ski]|
+|    sales|    3|  Ella|  4800|   [skate, ski]|
+|    sales|    4|  Ebba|  4800|    [game, ski]|
+|personnel|    5| Lilly|  3500|   [climb, ski]|
+|  develop|    7|Astrid|  4200|    [game, ski]|
+|  develop|    8|  Saga|  6000|   [kajak, ski]|
+|  develop|    9| Freja|  4500|  [game, kajak]|
+|  develop|   10| Wilma|  5200|    [game, ski]|
+|  develop|   11|  Maja|  5200|[game, farming]|
 
 The following code can be used to create the sample dataset
 
-    case class Salary(depName: String, empNo: Long, name: String, salary: Long, hobby: Seq[String])
+    case class Salary(depName: String, empNo: Long, name: String, 
+        salary: Long, hobby: Seq[String])
     val empsalary = Seq(
-      Salary("sales",     1,  "Alice Johansson",  5000, List("game",  "ski")),
-      Salary("personnel", 2,  "Olivia Johansson", 3900, List("game",  "ski")),
-      Salary("sales",     3,  "Ella Andersson",   4800, List("skate", "ski")),
-      Salary("sales",     4,  "Ebba Karlsson",    4800, List("game",  "ski")),
-      Salary("personnel", 5,  "Lilly Andersson",  3500, List("climb", "ski")),
-      Salary("develop",   7,  "Astrid Johansson", 4200, List("game",  "ski")),
-      Salary("develop",   8,  "Saga Karlsson",    6000, List("kajak", "ski")),
-      Salary("develop",   9,  "Freja Nilsson",    4500, List("game",  "kajak")),
-      Salary("develop",   10, "Wilma Nilsson",    5200, List("game",  "ski")),
-      Salary("develop",   11, "Maja Nilsson",     5200, List("game",  "farming"))).toDS
+      Salary("sales",     1,  "Alice",  5000, List("game",  "ski")),
+      Salary("personnel", 2,  "Olivia", 3900, List("game",  "ski")),
+      Salary("sales",     3,  "Ella",   4800, List("skate", "ski")),
+      Salary("sales",     4,  "Ebba",   4800, List("game",  "ski")),
+      Salary("personnel", 5,  "Lilly",  3500, List("climb", "ski")),
+      Salary("develop",   7,  "Astrid", 4200, List("game",  "ski")),
+      Salary("develop",   8,  "Saga",   6000, List("kajak", "ski")),
+      Salary("develop",   9,  "Freja",  4500, List("game",  "kajak")),
+      Salary("develop",   10, "Wilma",  5200, List("game",  "ski")),
+      Salary("develop",   11, "Maja",   5200, List("game",  "farming"))).toDS
     empsalary.createTempView("empsalary")
     empsalary.show()
 
@@ -116,18 +117,18 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name            |salary|salaries                      |average_salary|total_salary|
-|:--------|:----|:---------------|:-----|:-----------------------------|:-------------|:-----------|
-|develop  |7    |Astrid Johansson|4200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |8    |Saga Karlsson   |6000  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |9    |Freja Nilsson   |4500  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |10   |Wilma Nilsson   |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |11   |Maja Nilsson    |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|sales    |1    |Alice Johansson |5000  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |3    |Ella Andersson  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |4    |Ebba Karlsson   |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|personnel|2    |Olivia Johansson|3900  |[3900, 3500]                  |3700          |7400        |
-|personnel|5    |Lilly Andersson |3500  |[3900, 3500]                  |3700          |7400        |
+|depName  |empNo|name  |salary|salaries                      |average_salary|total_salary|
+|:--------|:----|:-----|:-----|:-----------------------------|:-------------|:-----------|
+|develop  |7    |Astrid|4200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
+|develop  |8    |Saga  |6000  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
+|develop  |9    |Freja |4500  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
+|develop  |10   |Wilma |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
+|develop  |11   |Maja  |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
+|sales    |1    |Alice |5000  |[5000, 4800, 4800]            |4866          |14600       |
+|sales    |3    |Ella  |4800  |[5000, 4800, 4800]            |4866          |14600       |
+|sales    |4    |Ebba  |4800  |[5000, 4800, 4800]            |4866          |14600       |
+|personnel|2    |Olivia|3900  |[3900, 3500]                  |3700          |7400        |
+|personnel|5    |Lilly |3500  |[3900, 3500]                  |3700          |7400        |
 
 From the output, we can see that column salaries by function `collect_list` has the same values in a window.
 
@@ -153,18 +154,18 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name            |salary|salaries                      |average_salary|total_salary|
-|:--------|:----|:---------------|:-----|:-----------------------------|:-------------|:-----------|
-|develop  |8    |Saga Karlsson   |6000  |[6000]                        |6000          |6000        |
-|develop  |10   |Wilma Nilsson   |5200  |[6000, 5200, 5200]            |5466          |16400       |
-|develop  |11   |Maja Nilsson    |5200  |[6000, 5200, 5200]            |5466          |16400       |
-|develop  |9    |Freja Nilsson   |4500  |[6000, 5200, 5200, 4500]      |5225          |20900       |
-|develop  |7    |Astrid Johansson|4200  |[6000, 5200, 5200, 4500, 4200]|5020          |25100       |
-|sales    |1    |Alice Johansson |5000  |[5000]                        |5000          |5000        |
-|sales    |3    |Ella Andersson  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |4    |Ebba Karlsson   |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|personnel|2    |Olivia Johansson|3900  |[3900]                        |3900          |3900        |
-|personnel|5    |Lilly Andersson |3500  |[3900, 3500]                  |3700          |7400        |
+|depName  |empNo|name  |salary|salaries                      |average_salary|total_salary|
+|:--------|:----|:-----|:-----|:-----------------------------|:-------------|:-----------|
+|develop  |8    |Saga  |6000  |[6000]                        |6000          |6000        |
+|develop  |10   |Wilma |5200  |[6000, 5200, 5200]            |5466          |16400       |
+|develop  |11   |Maja  |5200  |[6000, 5200, 5200]            |5466          |16400       |
+|develop  |9    |Freja |4500  |[6000, 5200, 5200, 4500]      |5225          |20900       |
+|develop  |7    |Astrid|4200  |[6000, 5200, 5200, 4500, 4200]|5020          |25100       |
+|sales    |1    |Alice |5000  |[5000]                        |5000          |5000        |
+|sales    |3    |Ella  |4800  |[5000, 4800, 4800]            |4866          |14600       |
+|sales    |4    |Ebba  |4800  |[5000, 4800, 4800]            |4866          |14600       |
+|personnel|2    |Olivia|3900  |[3900]                        |3900          |3900        |
+|personnel|5    |Lilly |3500  |[3900, 3500]                  |3700          |7400        |
 
 
 From the output we can see that column salaries by function `collect_list` does NOT have the same values in a window. 
@@ -199,23 +200,23 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name            |salary|rank|dense_rank|row_number|ntile|percent_rank|
-|:--------|:----|:---------------|:-----|:---|:---------|:---------|:----|:-----------|
-|develop  |8    |Saga Karlsson   |6000  |1   |1         |1         |1    |0.0         |
-|develop  |10   |Wilma Nilsson   |5200  |2   |2         |2         |1    |0.25        |
-|develop  |11   |Maja Nilsson    |5200  |2   |2         |3         |2    |0.25        |
-|develop  |9    |Freja Nilsson   |4500  |4   |3         |4         |2    |0.75        |
-|develop  |7    |Astrid Johansson|4200  |5   |4         |5         |3    |1.0         |
-|sales    |1    |Alice Johansson |5000  |1   |1         |1         |1    |0.0         |
-|sales    |3    |Ella Andersson  |4800  |2   |2         |2         |2    |0.5         |
-|sales    |4    |Ebba Karlsson   |4800  |2   |2         |3         |3    |0.5         |
-|personnel|2    |Olivia Johansson|3900  |1   |1         |1         |1    |0.0         |
-|personnel|5    |Lilly Andersson |3500  |2   |2         |2         |2    |1.0         |
+|depName  |empNo|name  |salary|rank|dense_rank|row_number|ntile|percent_rank|
+|:--------|:----|:-----|:-----|:---|:---------|:---------|:----|:-----------|
+|develop  |8    |Saga  |6000  |1   |1         |1         |1    |0.0         |
+|develop  |10   |Wilma |5200  |2   |2         |2         |1    |0.25        |
+|develop  |11   |Maja  |5200  |2   |2         |3         |2    |0.25        |
+|develop  |9    |Freja |4500  |4   |3         |4         |2    |0.75        |
+|develop  |7    |Astrid|4200  |5   |4         |5         |3    |1.0         |
+|sales    |1    |Alice |5000  |1   |1         |1         |1    |0.0         |
+|sales    |3    |Ella  |4800  |2   |2         |2         |2    |0.5         |
+|sales    |4    |Ebba  |4800  |2   |2         |3         |3    |0.5         |
+|personnel|2    |Olivia|3900  |1   |1         |1         |1    |0.0         |
+|personnel|5    |Lilly |3500  |2   |2         |2         |2    |1.0         |
 
 After using the rank function, we can easily filter to get the rows we want. 
 
 The following example keeps the top 2 employees salary wise, others have to go. 
-On the sample dataset, Wilma Nilsson and Maja Nilsson have the same salary. 
+On the sample dataset, Wilma and Maja have the same salary. 
 Maja has to go according to order, unfortunately. 
 
     val overCategory = Window.partitionBy('depName).orderBy('salary desc)
@@ -243,18 +244,18 @@ The following example adding rows with lead and lag salary.
     
 Here is the output from the previous example
 
-|depName  |empNo|name            |salary|lead|lag |
-|:--------|:----|:---------------|:-----|:---|:---|
-|develop  |8    |Saga Karlsson   |6000  |5200|**null**|
-|develop  |10   |Wilma Nilsson   |5200  |5200|6000|
-|develop  |11   |Maja Nilsson    |5200  |4500|5200|
-|develop  |9    |Freja Nilsson   |4500  |4200|5200|
-|develop  |7    |Astrid Johansson|4200  |**null**|4500|
-|sales    |1    |Alice Johansson |5000  |4800|**null**|
-|sales    |3    |Ella Andersson  |4800  |4800|5000|
-|sales    |4    |Ebba Karlsson   |4800  |**null**|4800|
-|personnel|2    |Olivia Johansson|3900  |3500|**null**|
-|personnel|5    |Lilly Andersson |3500  |**null**|3900|
+|depName  |empNo|name  |salary|lead|lag |
+|:--------|:----|:-----|:-----|:---|:---|
+|develop  |8    |Saga  |6000  |5200|**null**|
+|develop  |10   |Wilma |5200  |5200|6000|
+|develop  |11   |Maja  |5200  |4500|5200|
+|develop  |9    |Freja |4500  |4200|5200|
+|develop  |7    |Astrid|4200  |**null**|4500|
+|sales    |1    |Alice |5000  |4800|**null**|
+|sales    |3    |Ella  |4800  |4800|5000|
+|sales    |4    |Ebba  |4800  |**null**|4800|
+|personnel|2    |Olivia|3900  |3500|**null**|
+|personnel|5    |Lilly |3500  |**null**|3900|
 
 Notice from the output, the first row in a window with `lag` will have value **null**, and the last row in a window with `lead` will have value **null**
 
@@ -294,18 +295,18 @@ Example code to calculate running total.
 
 Here is the output. 
 
-|depName  |empNo|name            |salary|rank|costs|
-|:--------|:----|:---------------|:-----|:---|:----|
-|develop  |8    |Saga Karlsson   |6000  |1   |6000 |
-|develop  |10   |Wilma Nilsson   |5200  |2   |16400|
-|develop  |11   |Maja Nilsson    |5200  |2   |16400|
-|develop  |9    |Freja Nilsson   |4500  |4   |20900|
-|develop  |7    |Astrid Johansson|4200  |5   |25100|
-|sales    |1    |Alice Johansson |5000  |1   |5000 |
-|sales    |3    |Ella Andersson  |4800  |2   |14600|
-|sales    |4    |Ebba Karlsson   |4800  |2   |14600|
-|personnel|2    |Olivia Johansson|3900  |1   |3900 |
-|personnel|5    |Lilly Andersson |3500  |2   |7400 |
+|depName  |empNo|name  |salary|rank|costs|
+|:--------|:----|:-----|:-----|:---|:----|
+|develop  |8    |Saga  |6000  |1   |6000 |
+|develop  |10   |Wilma |5200  |2   |16400|
+|develop  |11   |Maja  |5200  |2   |16400|
+|develop  |9    |Freja |4500  |4   |20900|
+|develop  |7    |Astrid|4200  |5   |25100|
+|sales    |1    |Alice |5000  |1   |5000 |
+|sales    |3    |Ella  |4800  |2   |14600|
+|sales    |4    |Ebba  |4800  |2   |14600|
+|personnel|2    |Olivia|3900  |1   |3900 |
+|personnel|5    |Lilly |3500  |2   |7400 |
 
 Depending on the example behavior we want, we might get row_number first, then calculate the running total.  
 
@@ -373,18 +374,18 @@ Here is an example use directly after `Window.partitionBy`, without an `orderBy`
 
 The output from the previous example
 
-|depName  |empNo|name            |salary|salaries    |total_salary|
-|:--------|:----|:---------------|:-----|:-----------|:-----------|
-|develop  |7    |Astrid Johansson|4200  |[4200, 6000]|10200       |
-|develop  |8    |Saga Karlsson   |6000  |[6000, 4500]|10500       |
-|develop  |9    |Freja Nilsson   |4500  |[4500, 5200]|9700        |
-|develop  |10   |Wilma Nilsson   |5200  |[5200, 5200]|10400       |
-|develop  |11   |Maja Nilsson    |5200  |[5200]      |5200        |
-|sales    |1    |Alice Johansson |5000  |[5000, 4800]|9800        |
-|sales    |3    |Ella Andersson  |4800  |[4800, 4800]|9600        |
-|sales    |4    |Ebba Karlsson   |4800  |[4800]      |4800        |
-|personnel|2    |Olivia Johansson|3900  |[3900, 3500]|7400        |
-|personnel|5    |Lilly Andersson |3500  |[3500]      |3500        |
+|depName  |empNo|name  |salary|salaries    |total_salary|
+|:--------|:----|:-----|:-----|:-----------|:-----------|
+|develop  |7    |Astrid|4200  |[4200, 6000]|10200       |
+|develop  |8    |Saga  |6000  |[6000, 4500]|10500       |
+|develop  |9    |Freja |4500  |[4500, 5200]|9700        |
+|develop  |10   |Wilma |5200  |[5200, 5200]|10400       |
+|develop  |11   |Maja  |5200  |[5200]      |5200        |
+|sales    |1    |Alice |5000  |[5000, 4800]|9800        |
+|sales    |3    |Ella  |4800  |[4800, 4800]|9600        |
+|sales    |4    |Ebba  |4800  |[4800]      |4800        |
+|personnel|2    |Olivia|3900  |[3900, 3500]|7400        |
+|personnel|5    |Lilly |3500  |[3500]      |3500        |
 
 Here is an example use after `Window.partitionBy` and `orderBy`. The data in the window is ordered.
 
@@ -397,18 +398,18 @@ Here is an example use after `Window.partitionBy` and `orderBy`. The data in the
 
 The output from the previous example
 
-|depName  |empNo|name            |salary|salaries    |total_salary|
-|:--------|:----|:---------------|:-----|:-----------|:-----------|
-|develop  |8    |Saga Karlsson   |6000  |[6000, 5200]|11200       |
-|develop  |10   |Wilma Nilsson   |5200  |[5200, 5200]|10400       |
-|develop  |11   |Maja Nilsson    |5200  |[5200, 4500]|9700        |
-|develop  |9    |Freja Nilsson   |4500  |[4500, 4200]|8700        |
-|develop  |7    |Astrid Johansson|4200  |[4200]      |4200        |
-|sales    |1    |Alice Johansson |5000  |[5000, 4800]|9800        |
-|sales    |3    |Ella Andersson  |4800  |[4800, 4800]|9600        |
-|sales    |4    |Ebba Karlsson   |4800  |[4800]      |4800        |
-|personnel|2    |Olivia Johansson|3900  |[3900, 3500]|7400        |
-|personnel|5    |Lilly Andersson |3500  |[3500]      |3500        |
+|depName  |empNo|name  |salary|salaries    |total_salary|
+|:--------|:----|:-----|:-----|:-----------|:-----------|
+|develop  |8    |Saga  |6000  |[6000, 5200]|11200       |
+|develop  |10   |Wilma |5200  |[5200, 5200]|10400       |
+|develop  |11   |Maja  |5200  |[5200, 4500]|9700        |
+|develop  |9    |Freja |4500  |[4500, 4200]|8700        |
+|develop  |7    |Astrid|4200  |[4200]      |4200        |
+|sales    |1    |Alice |5000  |[5000, 4800]|9800        |
+|sales    |3    |Ella  |4800  |[4800, 4800]|9600        |
+|sales    |4    |Ebba  |4800  |[4800]      |4800        |
+|personnel|2    |Olivia|3900  |[3900, 3500]|7400        |
+|personnel|5    |Lilly |3500  |[3500]      |3500        |
 
 ## Median
 
@@ -436,18 +437,18 @@ We can use window function to calculate the median value. Here is an example
 
 The output from the previous example
 
-|depName  |empNo|name            |salary|salaries                      |median_salary|
-|:--------|:----|:---------------|:-----|:-----------------------------|:------------|
-|develop  |7    |Astrid Johansson|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |9    |Freja Nilsson   |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |10   |Wilma Nilsson   |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |11   |Maja Nilsson    |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |8    |Saga Karlsson   |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|sales    |3    |Ella Andersson  |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |4    |Ebba Karlsson   |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |1    |Alice Johansson |5000  |[4800, 4800, 5000]            |4800         |
-|personnel|5    |Lilly Andersson |3500  |[3500, 3900]                  |3900         |
-|personnel|2    |Olivia Johansson|3900  |[3500, 3900]                  |3900         |
+|depName  |empNo|name  |salary|salaries                      |median_salary|
+|:--------|:----|:-----|:-----|:-----------------------------|:------------|
+|develop  |7    |Astrid|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |9    |Freja |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |10   |Wilma |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |11   |Maja  |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |8    |Saga  |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|sales    |3    |Ella  |4800  |[4800, 4800, 5000]            |4800         |
+|sales    |4    |Ebba  |4800  |[4800, 4800, 5000]            |4800         |
+|sales    |1    |Alice |5000  |[4800, 4800, 5000]            |4800         |
+|personnel|5    |Lilly |3500  |[3500, 3900]                  |3900         |
+|personnel|2    |Olivia|3900  |[3500, 3900]                  |3900         |
 
 
 ### Use groupBy then join back to calculate the median value
@@ -464,18 +465,18 @@ We can calculate the median value first, then join back with the original DataFr
 The output from the previous example. 
 
 
-|depName  |empNo|name            |salary|salaries                      |median_salary|
-|:--------|:----|:---------------|:-----|:-----------------------------|:------------|
-|sales    |1    |Alice Johansson |5000  |[4800, 4800, 5000]            |4800         |
-|personnel|2    |Olivia Johansson|3900  |[3500, 3900]                  |3900         |
-|sales    |3    |Ella Andersson  |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |4    |Ebba Karlsson   |4800  |[4800, 4800, 5000]            |4800         |
-|personnel|5    |Lilly Andersson |3500  |[3500, 3900]                  |3900         |
-|develop  |7    |Astrid Johansson|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |8    |Saga Karlsson   |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |9    |Freja Nilsson   |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |10   |Wilma Nilsson   |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |11   |Maja Nilsson    |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|depName  |empNo|name  |salary|salaries                      |median_salary|
+|:--------|:----|:-----|:-----|:-----------------------------|:------------|
+|sales    |1    |Alice |5000  |[4800, 4800, 5000]            |4800         |
+|personnel|2    |Olivia|3900  |[3500, 3900]                  |3900         |
+|sales    |3    |Ella  |4800  |[4800, 4800, 5000]            |4800         |
+|sales    |4    |Ebba  |4800  |[4800, 4800, 5000]            |4800         |
+|personnel|5    |Lilly |3500  |[3500, 3900]                  |3900         |
+|develop  |7    |Astrid|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |8    |Saga  |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |9    |Freja |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |10   |Wilma |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+|develop  |11   |Maja  |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
 
 
 ## References
