@@ -34,18 +34,7 @@ The sample dataset has 4 columns,
 
 Here is the sample dataset
 
-|  depName|empNo|  name|salary|          hobby|
-|:--------|:----|:-----|:-----|:--------------|
-|    sales|    1| Alice|  5000|    [game, ski]|
-|personnel|    2|Olivia|  3900|    [game, ski]|
-|    sales|    3|  Ella|  4800|   [skate, ski]|
-|    sales|    4|  Ebba|  4800|    [game, ski]|
-|personnel|    5| Lilly|  3500|   [climb, ski]|
-|  develop|    7|Astrid|  4200|    [game, ski]|
-|  develop|    8|  Saga|  6000|   [kajak, ski]|
-|  develop|    9| Freja|  4500|  [game, kajak]|
-|  develop|   10| Wilma|  5200|    [game, ski]|
-|  develop|   11|  Maja|  5200|[game, farming]|
+![sample-dataset](../images/spark-window-function-sample-dataset.png)
 
 The following code can be used to create the sample dataset
 
@@ -71,12 +60,7 @@ The following code can be used to create the sample dataset
 There are hundreds of [general spark functions](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.functions$) in which 
 **Aggregate Functions** and |**Window Functions** categories are related to this case. 
 
-
-| Category Name                  | Input                | Output                  | Example |
-|:-------------------------------|:---------------------|:------------------------|:--------|
-|**Aggregate Functions**         |a group of rows       |a single return value    |avg,count,collect_list
-|**Window Functions - Ranking**  |a single row + Window |a single return value    |rank,denseRank,percentRank,ntile,rowNumber
-|**Window Functions - Analytics**|a single row + Window |a single return value    |cumeDist,firstValue,lastValue,lag,lead
+![spark-function-categories](../images/spark-window-function-spark-function-categories.png)
 
 Functions in other categories are NOT applicable for Spark Window. 
 
@@ -98,7 +82,7 @@ A **Basic Frame** has the following traits.
 - The frame will be the same for every row in the same within the same partition. (**NOTE**: This will NOT be the case with **Ordered** Frame)
 - Aggregate/Window functions can be applied on each row+frame to generate a single value
 
-![basic-window-function](basic-window.png)
+![basic-window-function](../images/spark-window-function-basic-window.png)
 
 In the example, in the previous graph and the following code, we calculate 
 
@@ -117,18 +101,7 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name  |salary|salaries                      |average_salary|total_salary|
-|:--------|:----|:-----|:-----|:-----------------------------|:-------------|:-----------|
-|develop  |7    |Astrid|4200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |8    |Saga  |6000  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |9    |Freja |4500  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |10   |Wilma |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|develop  |11   |Maja  |5200  |[4200, 6000, 4500, 5200, 5200]|5020          |25100       |
-|sales    |1    |Alice |5000  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |3    |Ella  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |4    |Ebba  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|personnel|2    |Olivia|3900  |[3900, 3500]                  |3700          |7400        |
-|personnel|5    |Lilly |3500  |[3900, 3500]                  |3700          |7400        |
+![output-basic-window](../images/spark-window-function-output-basic-window.png)
 
 From the output, we can see that column salaries by function `collect_list` has the same values in a window.
 
@@ -154,18 +127,7 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name  |salary|salaries                      |average_salary|total_salary|
-|:--------|:----|:-----|:-----|:-----------------------------|:-------------|:-----------|
-|develop  |8    |Saga  |6000  |[6000]                        |6000          |6000        |
-|develop  |10   |Wilma |5200  |[6000, 5200, 5200]            |5466          |16400       |
-|develop  |11   |Maja  |5200  |[6000, 5200, 5200]            |5466          |16400       |
-|develop  |9    |Freja |4500  |[6000, 5200, 5200, 4500]      |5225          |20900       |
-|develop  |7    |Astrid|4200  |[6000, 5200, 5200, 4500, 4200]|5020          |25100       |
-|sales    |1    |Alice |5000  |[5000]                        |5000          |5000        |
-|sales    |3    |Ella  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|sales    |4    |Ebba  |4800  |[5000, 4800, 4800]            |4866          |14600       |
-|personnel|2    |Olivia|3900  |[3900]                        |3900          |3900        |
-|personnel|5    |Lilly |3500  |[3900, 3500]                  |3700          |7400        |
+![output-ordered-frame](../images/spark-window-function-output-ordered-frame.png)
 
 
 From the output we can see that column salaries by function `collect_list` does NOT have the same values in a window. 
@@ -177,13 +139,7 @@ The `average_salary` and `total_salary` are not over the whole department, but a
 
 Here is a table of all the rank functions supported in Spark.
 
-|function    |description(within a window partition)|note |
-|:-----------|:-------------------------------------|:----|
-|rank        |rank of rows                          |might have gap, rank will be 1 2 2 4 ..., if the second & third has the same value, the fourth row will take the rank 4, 3 will be jumped.
-|dense_rank  |dense rank or rows                    |no gaps, values will be like 1 2 2 3 ..., it the second & third has the same value, the fourth row will take the rank 3. 
-|row_number  |row number                            |sequential natural number, the rank will be 1 2 3 4 ..., even if the second & third has the same value.
-|ntile       |ntile id                              |split partition to ntile, the first group in the window be tile 1, the second group will be tile 2, and so on.   
-|percent_rank|(rank - 1)/(total_rows - 1)           |useful like take 20% top people, 0 0.25 0.25 ...
+![rank-functions](../images/spark-window-function-rank-functions.png)
 
 Here is the sample code 
 
@@ -200,18 +156,7 @@ Here is the sample code
 
 Here is the output from the previous sample code. 
 
-|depName  |empNo|name  |salary|rank|dense_rank|row_number|ntile|percent_rank|
-|:--------|:----|:-----|:-----|:---|:---------|:---------|:----|:-----------|
-|develop  |8    |Saga  |6000  |1   |1         |1         |1    |0.0         |
-|develop  |10   |Wilma |5200  |2   |2         |2         |1    |0.25        |
-|develop  |11   |Maja  |5200  |2   |2         |3         |2    |0.25        |
-|develop  |9    |Freja |4500  |4   |3         |4         |2    |0.75        |
-|develop  |7    |Astrid|4200  |5   |4         |5         |3    |1.0         |
-|sales    |1    |Alice |5000  |1   |1         |1         |1    |0.0         |
-|sales    |3    |Ella  |4800  |2   |2         |2         |2    |0.5         |
-|sales    |4    |Ebba  |4800  |2   |2         |3         |3    |0.5         |
-|personnel|2    |Olivia|3900  |1   |1         |1         |1    |0.0         |
-|personnel|5    |Lilly |3500  |2   |2         |2         |2    |1.0         |
+![output-rank-function](../images/spark-window-function-output-rank-function.png)
 
 After using the rank function, we can easily filter to get the rows we want. 
 
@@ -244,18 +189,7 @@ The following example adding rows with lead and lag salary.
     
 Here is the output from the previous example
 
-|depName  |empNo|name  |salary|lead|lag |
-|:--------|:----|:-----|:-----|:---|:---|
-|develop  |8    |Saga  |6000  |5200|**null**|
-|develop  |10   |Wilma |5200  |5200|6000|
-|develop  |11   |Maja  |5200  |4500|5200|
-|develop  |9    |Freja |4500  |4200|5200|
-|develop  |7    |Astrid|4200  |**null**|4500|
-|sales    |1    |Alice |5000  |4800|**null**|
-|sales    |3    |Ella  |4800  |4800|5000|
-|sales    |4    |Ebba  |4800  |**null**|4800|
-|personnel|2    |Olivia|3900  |3500|**null**|
-|personnel|5    |Lilly |3500  |**null**|3900|
+![output-lag-lead](../images/spark-window-function-output-lag-lead.png)
 
 Notice from the output, the first row in a window with `lag` will have value **null**, and the last row in a window with `lead` will have value **null**
 
@@ -295,18 +229,7 @@ Example code to calculate running total.
 
 Here is the output. 
 
-|depName  |empNo|name  |salary|rank|costs|
-|:--------|:----|:-----|:-----|:---|:----|
-|develop  |8    |Saga  |6000  |1   |6000 |
-|develop  |10   |Wilma |5200  |2   |16400|
-|develop  |11   |Maja  |5200  |2   |16400|
-|develop  |9    |Freja |4500  |4   |20900|
-|develop  |7    |Astrid|4200  |5   |25100|
-|sales    |1    |Alice |5000  |1   |5000 |
-|sales    |3    |Ella  |4800  |2   |14600|
-|sales    |4    |Ebba  |4800  |2   |14600|
-|personnel|2    |Olivia|3900  |1   |3900 |
-|personnel|5    |Lilly |3500  |2   |7400 |
+![output-running-total](../images/spark-window-function-output-running-total.png)
 
 Depending on the example behavior we want, we might get row_number first, then calculate the running total.  
 
@@ -341,17 +264,7 @@ both functions accept two parameters, [start, end] all inclusive. The parameters
 
 `rowsBetween` get the frame boundary based on the row index in the window compared to `currentRow`. here are a few examples and it's meaning. 
 
-| function example                                                 | meaning |
-|:-----------------------------------------------------------------|:--------|
-|.rowsBetween(Window.currentRow, 1)                                |currentRow and the next row |
-|.rowsBetween(Window.currentRow, 2)                                |currentRow and the next 2 rows |
-|.rowsBetween(-1, Window.currentRow)                               |previous row and the currentRow |
-|.rowsBetween(-2, Window.currentRow)                               |previous 2 rows and the currentRow |
-|.rowsBetween(-1, 1)                                               |previous row, the current row and the next row |
-|.rowsBetween(Window.currentRow, 1)                                |currentRow and the next row |
-|.rowsBetween(Window.unboundedPreceding, Window.currentRow).       |all previous rows and the currentRow |
-|.rowsBetween(Window.currentRow, Window.unboundedFollowing).       |all previous rows and the currentRow |
-|.rowsBetween(Window.unboundedPreceding, Window.unboundedFollowing)|all rows in the window|
+![range-frame](../images/spark-window-function-range-frame.png)
 
 `rangeBetween` get the frame boundary based on row **value** in the window compared to `currentRow`. The difference compares to `rowsBetween` is that it compare with **value** of the current row. 
 
@@ -374,18 +287,7 @@ Here is an example use directly after `Window.partitionBy`, without an `orderBy`
 
 The output from the previous example
 
-|depName  |empNo|name  |salary|salaries    |total_salary|
-|:--------|:----|:-----|:-----|:-----------|:-----------|
-|develop  |7    |Astrid|4200  |[4200, 6000]|10200       |
-|develop  |8    |Saga  |6000  |[6000, 4500]|10500       |
-|develop  |9    |Freja |4500  |[4500, 5200]|9700        |
-|develop  |10   |Wilma |5200  |[5200, 5200]|10400       |
-|develop  |11   |Maja  |5200  |[5200]      |5200        |
-|sales    |1    |Alice |5000  |[5000, 4800]|9800        |
-|sales    |3    |Ella  |4800  |[4800, 4800]|9600        |
-|sales    |4    |Ebba  |4800  |[4800]      |4800        |
-|personnel|2    |Olivia|3900  |[3900, 3500]|7400        |
-|personnel|5    |Lilly |3500  |[3500]      |3500        |
+![output-range-frame](../images/spark-window-function-output-range-frame.png)
 
 Here is an example use after `Window.partitionBy` and `orderBy`. The data in the window is ordered.
 
@@ -398,23 +300,13 @@ Here is an example use after `Window.partitionBy` and `orderBy`. The data in the
 
 The output from the previous example
 
-|depName  |empNo|name  |salary|salaries    |total_salary|
-|:--------|:----|:-----|:-----|:-----------|:-----------|
-|develop  |8    |Saga  |6000  |[6000, 5200]|11200       |
-|develop  |10   |Wilma |5200  |[5200, 5200]|10400       |
-|develop  |11   |Maja  |5200  |[5200, 4500]|9700        |
-|develop  |9    |Freja |4500  |[4500, 4200]|8700        |
-|develop  |7    |Astrid|4200  |[4200]      |4200        |
-|sales    |1    |Alice |5000  |[5000, 4800]|9800        |
-|sales    |3    |Ella  |4800  |[4800, 4800]|9600        |
-|sales    |4    |Ebba  |4800  |[4800]      |4800        |
-|personnel|2    |Olivia|3900  |[3900, 3500]|7400        |
-|personnel|5    |Lilly |3500  |[3500]      |3500        |
+![output-range-frame2](../images/spark-window-function-output-range-frame2.png)
 
 ## Median
 
 `mean`(`avg`) and `median` are commonly used in statistics. In certain cases `median` are more robust comparing to mean, since it will filter out outlier values.
 
+![mean-median](../images/spark-window-function-mean-median.png)
 |             | mean   | median |
 |:------------|:-------|:-------|
 | definition  | average value | middle value |
@@ -437,18 +329,7 @@ We can use window function to calculate the median value. Here is an example
 
 The output from the previous example
 
-|depName  |empNo|name  |salary|salaries                      |median_salary|
-|:--------|:----|:-----|:-----|:-----------------------------|:------------|
-|develop  |7    |Astrid|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |9    |Freja |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |10   |Wilma |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |11   |Maja  |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |8    |Saga  |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|sales    |3    |Ella  |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |4    |Ebba  |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |1    |Alice |5000  |[4800, 4800, 5000]            |4800         |
-|personnel|5    |Lilly |3500  |[3500, 3900]                  |3900         |
-|personnel|2    |Olivia|3900  |[3500, 3900]                  |3900         |
+![output-median](../images/spark-window-function-output-median.png)
 
 
 ### Use groupBy then join back to calculate the median value
@@ -464,19 +345,7 @@ We can calculate the median value first, then join back with the original DataFr
 
 The output from the previous example. 
 
-
-|depName  |empNo|name  |salary|salaries                      |median_salary|
-|:--------|:----|:-----|:-----|:-----------------------------|:------------|
-|sales    |1    |Alice |5000  |[4800, 4800, 5000]            |4800         |
-|personnel|2    |Olivia|3900  |[3500, 3900]                  |3900         |
-|sales    |3    |Ella  |4800  |[4800, 4800, 5000]            |4800         |
-|sales    |4    |Ebba  |4800  |[4800, 4800, 5000]            |4800         |
-|personnel|5    |Lilly |3500  |[3500, 3900]                  |3900         |
-|develop  |7    |Astrid|4200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |8    |Saga  |6000  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |9    |Freja |4500  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |10   |Wilma |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
-|develop  |11   |Maja  |5200  |[4200, 4500, 5200, 5200, 6000]|5200         |
+![output-median](../images/spark-window-function-output-median2.png)
 
 
 ## References
