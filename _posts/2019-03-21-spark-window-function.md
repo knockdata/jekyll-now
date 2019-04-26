@@ -1,4 +1,9 @@
-# Spark Window Function
+---
+layout: post
+title: Spark Window Function - PySpark 
+comments: true
+tags: spark, pyspark, big data, statistics, window, window function
+---
 
 **Window** (also, windowing or windowed) functions perform a calculation over a set of rows.
 It is an important tool to do statistics. Most Databases support Window functions. Spark from version 1.4 start supporting Window functions. 
@@ -102,6 +107,8 @@ Here is the sample code
 Here is the output from the previous sample code. 
 
 ![output-basic-window](../images/spark-window-function-output-basic-window.png)
+
+<!-- readmore -->
 
 From the output, we can see that column salaries by function `collect_list` has the same values in a window.
 
