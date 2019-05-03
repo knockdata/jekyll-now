@@ -31,13 +31,15 @@ Execute the following command
 
 	docker run -it --name nginx --rm -p 8080:80 nginx:1.15
 
-| option     | meaning |
+![nginx-tutorial-docker-options](../images/nginx-tutorial-docker-options.png)
+
+<!--| option     | meaning |
 |:-----------|:--------|
 | -it        |: interactive model
 |--name nginx| the docker container name is nginx so that we can easily removed later
 |--rm.       |: remove the container if we stop it
 |-p 8080:80  | map container port 80 to 8080 of the host 
-|nginx:1.15  | Using nginx image, with specific version 1.15
+|nginx:1.15  | Using nginx image, with specific version 1.15-->
 
 We can now open this link [http://localhost:8080/](http://localhost:8080/) with a web browser. Something like this shall appear.
 
@@ -61,15 +63,17 @@ The nginx image comes with a default configuration file `/etc/nginx/conf.d/defau
 	        index  index.html index.htm;
 	    }
     }
+
+![nginx-tutorial-http-configuration-options](../images/nginx-tutorial-http-configuration-options.png)
     
-| configuration line            | meaning |
+<!--| configuration line            | meaning |
 |:------------------------------|:--------|
 | server                        | server block use the server_name and listen directives to bind to tcp sockets. It serve similar function as Apache
 |listen       80;               | listen to port 80, by default it's HTTP port, in the next example we will use HTTPS
 |server_name  localhost;        | It can be a domain name or just simple a machine name
 |location /                     | location block, / correspond to root location. for example the data will be get from folder /usr/share/nginx/html when we access http://localhost/
 |root   /usr/share/nginx/html;  | root folder for the location block, files include files in sub directories can be accessed with the location.
-|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, if could not find index.html try index.htm 
+|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, if could not find index.html try index.htm -->
 
 
 Run the following command to start a simple file server. We are set the current folder `$(pwd)` as the root folder. It will be accessable by `http://localhost:8080/`.
@@ -125,12 +129,14 @@ Create a configuration file `https.conf` with following content.
 
 Compare to the previous configuration for HTTP. There are few differences which listed in the following table
 
-| configuration line            | meaning |
+![nginx-tutorial-https-configuration-options](../images/nginx-tutorial-https-configuraton-options.png)
+
+<!--| configuration line            | meaning |
 |:------------------------------|:--------|
 |listen 443 ssl;                                | Listening on port 443, with SSL encryption on
 |ssl_certificate /etc/nginx/ssl/example.crt;    |SSL certificate file, either created with self signed way or obtained |
 |ssl_certificate_key /etc/nginx/ssl/example.key;|SSL certificate key, the private key for the certificate
-
+-->
 Run the following command. The configuration, certificate, and key are mounted in the command.
 
 	docker run -it --rm --name nginx -p 8443:443 \
