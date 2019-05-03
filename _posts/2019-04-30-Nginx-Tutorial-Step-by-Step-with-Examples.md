@@ -1,8 +1,15 @@
-# Nginx Tutorial Step by Step with Examples
+---
+layout: post
+title: Nginx Tutorial Step by Step with Examples
+comments: true
+tags: nginx, reverse proxy, load balancer, CDN, content cache
+---
 
 Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache. The software was created by Igor Sysoev and first publicly released in 2004. 
 
 I got a chance to work with a project using nginx intensively. On the way, I spend some time experimenting with it. Here I record down my exploration of nginx. 
+
+The article will cover nginx runnable examples from basic web servers, HTTPS termination, reverse proxy, load balancing and content cache.
 
 ## Step 0 - Environment Preparation
 
@@ -31,20 +38,19 @@ Execute the following command
 
 	docker run -it --name nginx --rm -p 8080:80 nginx:1.15
 
-![nginx-tutorial-docker-options](../images/nginx-tutorial-docker-options.png)
+<!--![nginx-tutorial-docker-options](https://knockdata.github.io/images/nginx-tutorial-docker-options.png)-->
 
-<!--| option     | meaning |
+| option     | meaning |
 |:-----------|:--------|
 | -it        |: interactive model
 |--name nginx| the docker container name is nginx so that we can easily removed later
 |--rm.       |: remove the container if we stop it
 |-p 8080:80  | map container port 80 to 8080 of the host 
-|nginx:1.15  | Using nginx image, with specific version 1.15-->
+|nginx:1.15  | Using nginx image, with specific version 1.15
 
 We can now open this link [http://localhost:8080/](http://localhost:8080/) with a web browser. Something like this shall appear.
 
-<kbd><img src="../images/nginx-tutorial-welcome-to-nginx.png">
-</kbd>
+![nginx-tutorial-welcome-to-nginx](https://knockdata.github.io/images/nginx-tutorial-welcome-to-nginx.png)
 
 ## Step 2 - A Simple File Server
 
@@ -64,16 +70,16 @@ The nginx image comes with a default configuration file `/etc/nginx/conf.d/defau
 	    }
     }
 
-![nginx-tutorial-http-configuration-options](../images/nginx-tutorial-http-configuration-options.png)
+<!--![nginx-tutorial-http-configuration-options](https://knockdata.github.io/images/nginx-tutorial-http-configuration-options.png)-->
     
-<!--| configuration line            | meaning |
+| configuration line            | meaning |
 |:------------------------------|:--------|
 | server                        | server block use the server_name and listen directives to bind to tcp sockets. It serve similar function as Apache
 |listen       80;               | listen to port 80, by default it's HTTP port, in the next example we will use HTTPS
 |server_name  localhost;        | It can be a domain name or just simple a machine name
 |location /                     | location block, / correspond to root location. for example the data will be get from folder /usr/share/nginx/html when we access http://localhost/
 |root   /usr/share/nginx/html;  | root folder for the location block, files include files in sub directories can be accessed with the location.
-|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, if could not find index.html try index.htm -->
+|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, if could not find index.html try index.htm
 
 
 Run the following command to start a simple file server. We are set the current folder `$(pwd)` as the root folder. It will be accessable by `http://localhost:8080/`.
@@ -129,14 +135,14 @@ Create a configuration file `https.conf` with following content.
 
 Compare to the previous configuration for HTTP. There are few differences which listed in the following table
 
-![nginx-tutorial-https-configuration-options](../images/nginx-tutorial-https-configuraton-options.png)
+<!--![nginx-tutorial-https-configuration-options](https://knockdata.github.io/images/nginx-tutorial-https-configuraton-options.png)-->
 
-<!--| configuration line            | meaning |
+| configuration line            | meaning |
 |:------------------------------|:--------|
 |listen 443 ssl;                                | Listening on port 443, with SSL encryption on
 |ssl_certificate /etc/nginx/ssl/example.crt;    |SSL certificate file, either created with self signed way or obtained |
 |ssl_certificate_key /etc/nginx/ssl/example.key;|SSL certificate key, the private key for the certificate
--->
+
 Run the following command. The configuration, certificate, and key are mounted in the command.
 
 	docker run -it --rm --name nginx -p 8443:443 \
@@ -146,11 +152,11 @@ Run the following command. The configuration, certificate, and key are mounted i
 	    	    
 Open a browser with link [https://localhost:8443](https://localhost:8443). We will just be warned by the browser that you connection is not private. Something like this.
 
-<kbd>
-<img src="../images/nginx-tutorial-https-alarm-connection-is-not-private.png">
-</kbd>
 
-Just click <kbd>Adavand</kbd>, and <kbd>Proceed to localhost (unsafe)</kbd>.
+![nginx-tutorial-https-alarm-connection-is-not-private.png](https://knockdata.github.io/images/nginx-tutorial-https-alarm-connection-is-not-private.png)
+
+
+Just click **Adavand**, and **Proceed to localhost (unsafe)**.
 
 ## Step 4 - Some Random Web Server
 
@@ -230,11 +236,11 @@ Access [http://localhost:3001](http://localhost:3001) for the model searching ap
 
 **Proxy** (or sometime called **Forward Proxy**) is used when we wanna access internet from internal network. The computer on the boundary is acting as a proxy server. In the following image, there are 3 clients connect to the Forward Proxy. And the foward proxy is the only communication port to internet.
 
-![forward proxy](../images/nginx-tutorial-forward-proxy.png)
+![forward proxy](https://knockdata.github.io/images/nginx-tutorial-forward-proxy.png)
 
 **Reverse Proxy** on the other side is used when internet user wanna access services inside a data center. The computer on the boundary is acting as reverse proxy. It provide a single entry for **different** services hosted inside a data center. In quite quite some cases a Reverse Proxy is used to terminiate HTTPS traffic, so that the internal service don't have to deal with security setup.
 
-![reverse proxy](../images/nginx-tutorial-reverse-proxy.png)
+![reverse proxy](https://knockdata.github.io/images/nginx-tutorial-reverse-proxy.png)
 
 We will use docker-compose for the example. Create file `docker-compose.yml` with following content. 3 instances is included in the docker-compose, a nginx act as **Reverse Proxy**, serving service, and searching service.
 
@@ -328,7 +334,7 @@ While **Load Balancer** will  direct traffic to **the same** services. It can be
 - Achieve high availability
 - Rolling upgrade
 
-![load balancer](../images/nginx-tutorial-load-balancer.png)
+![load balancer](https://knockdata.github.io/images/nginx-tutorial-load-balancer.png)
 
 The main configure item to have load balancer is `upstream` in nginx. Here comes a sample configuration.
 
