@@ -1,9 +1,4 @@
----
-layout: post
-title: Nginx Tutorial Step by Step with Examples
-comments: true
-tags: nginx, reverse proxy, load balancer, CDN, content cache
----
+# Nginx Tutorial Step by Step with Examples
 
 Nginx is a web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache. The software was created by Igor Sysoev and first publicly released in 2004. 
 
@@ -72,14 +67,14 @@ The nginx image comes with a default configuration file `/etc/nginx/conf.d/defau
 | server                        | server block use the server_name and listen directives to bind to tcp sockets. It serve similar function as Apache
 |listen       80;               | listen to port 80, by default it's HTTP port, in the next example we will use HTTPS
 |server_name  localhost;        | It can be a domain name or just simple a machine name
-|location /                     | location block, / respond to root location
+|location /                     | location block, / correspond to root location. for example the data will be get from folder /usr/share/nginx/html when we access http://localhost/
 |root   /usr/share/nginx/html;  | root folder for the location block, files include files in sub directories can be accessed with the location.
-|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, then index.htm 
+|index  index.html index.htm;   | if we do not specify file, but only directory, it will first looking for index.html, if could not find index.html try index.htm 
 
 
 Run the following command to start a simple file server. We are set the current folder `$(pwd)` as the root folder. It will be accessable by `http://localhost:8080/`.
 
-	docker run -it --name nginx --rm -p 8080:80 -v $(pwd):/usr/share/nginx/html nginx:1.15
+	docker run -d --name nginx --rm -p 8080:80 -v $(pwd):/usr/share/nginx/html nginx:1.15
 	
 Now we can access the files in the folder. Depending on the file type, the browser might just open it, or download it.
 
@@ -87,7 +82,11 @@ Now we can access the files in the folder. Depending on the file type, the brows
 - [http://localhost:8080/test.txt](http://localhost:8080/test.txt): For text file, a broswer will likely open it.
 - [http://localhost:8080/run.sh](http://localhost:8080/run.sh): For sh file, a browser will likely download it.
 
+The default configuration inside the docker container can be checked with following command
 
+    docker exec -it nginx cat /etc/nginx/nginx.conf
+    docker exec -it nginx cat /etc/nginx/conf.d/default.conf
+    
 ## Step 3 - HTTPS
 
 Data is not encrypted on transit when we using HTTP. It means any machine along the way will be able to see the data you send and received. For example, all machine connected to the same WIFI hotspot as you will be able to see your content.
@@ -214,7 +213,7 @@ Run the following command to start the searching application.
 
 	docker run -it --rm --name searching \
 	  -p 3001:3000 \
-	  -v $(pwd)/serving.js:/bin/searching.js \
+	  -v $(pwd)/searching.js:/bin/searching.js \
 	  node:11.12 node /bin/searching.js
 	  
 Access [http://localhost:3000](http://localhost:3000) for the model seving application. 
