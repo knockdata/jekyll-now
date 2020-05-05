@@ -1,9 +1,12 @@
 # Graceful Upgrade with Canary Deployment using Pulumi
 
-Upgrading software to a new version is a normal procedure. 
-Canary deployment is commonly used to achieve a graceful upgrade. 
+Windows 95 was a fantastic product. While it will be extremely rare to continue use Window 95 but without any upgrade.
 
-This article uses Pulumi as the tool to achieve a graceful upgrade with zero interruption in a fully controlled manner. 
+Zero downtime is highly appreciated these days when the system is upgraded.
+
+Canary deployment is commonly used to achieve a graceful upgrade with zero downtime.
+
+This article uses Pulumi as the tool to achieve a graceful upgrade with zero interruption in a fully controlled manner.
 
 ## What is Canary Deployment
 
@@ -139,4 +142,4 @@ If you want to try out there 5 steps to follow.
 * [Install pulumi](https://www.pulumi.com/docs/get-started/kubernetes/install-pulumi/)
 * [Create a Pulumi project ](https://www.pulumi.com/docs/get-started/kubernetes/create-project/)
 * Copy the previous content of code and replace the `index.ts`
-* Play it
+* Play it as you wish
