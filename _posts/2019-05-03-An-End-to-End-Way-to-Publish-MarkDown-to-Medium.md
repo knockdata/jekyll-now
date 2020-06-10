@@ -1,11 +1,9 @@
 ---
 layout: post
-title: Nginx Tutorial Step by Step with Examples
+title: An End-to-End Way to Publish MarkDown Stories to Medium
 comments: true
-tags: nginx, reverse proxy, load balancer, CDN, content cache
+tags: medium, markdown, publish
 ---
-
-# An End-to-End Way to Publish MarkDown Stories to Medium
 
 [medium.com](medium.com) is a great platform with many great articles. While publishing stories from markdown files to medium is not as smooth as it could be. Here is one way end to end way to publish markdown stories to medium.
 

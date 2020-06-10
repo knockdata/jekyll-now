@@ -1,4 +1,9 @@
-# Graceful Upgrade with Canary Deployment using Pulumi
+---
+layout: post
+title: Graceful Upgrade with Canary Deployment using Pulumi
+comments: true
+tags: pulumi, kubernetes, canary
+---
 
 Windows 95 was a fantastic product. While it will be extremely rare to continue use Window 95 but without any upgrade.
 
